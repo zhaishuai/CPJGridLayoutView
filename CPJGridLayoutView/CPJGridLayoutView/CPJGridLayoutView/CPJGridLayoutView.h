@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "CPJLibMacros.h"
 
 @interface CPJGridLayoutView : UIView
 
@@ -14,11 +15,13 @@
 
 - (instancetype)initWithMarginX:(CGFloat)mx withMarginY:(CGFloat)my withQuantityOfEachRow:(NSInteger) quantity;
 
+- (void)layoutView;
+
 - (void)addView:(UIView *)view;
 
-- (void)addView:(UIView *)view withIndex:(NSInteger *)index;
+- (void)addView:(UIView *)view withIndex:(NSInteger)index;
 
-- (void)addView:(UIView *)view afterView:(UIView *)view;
+- (void)addView:(UIView *)view afterView:(UIView *)obj;
 
 - (void)removeAllView;
 
