@@ -85,4 +85,8 @@ enum CPJGridLayout {
     return CGPointMake(col * (self.subViewsize.width + self.marginX), row * (self.marginY + self.subViewsize.height));
 }
 
+- (void)dealloc{
+    [self removeObserver:self forKeyPath:@"frame"];
+}
+
 @end
