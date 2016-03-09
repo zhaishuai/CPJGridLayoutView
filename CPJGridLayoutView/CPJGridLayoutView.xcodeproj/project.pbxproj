@@ -16,6 +16,7 @@
 		D98726FE1C8ECED80002EE49 /* CPJGridLayoutViewTests.m in Sources */ = {isa = PBXBuildFile; fileRef = D98726FD1C8ECED80002EE49 /* CPJGridLayoutViewTests.m */; };
 		D98727091C8ECED80002EE49 /* CPJGridLayoutViewUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = D98727081C8ECED80002EE49 /* CPJGridLayoutViewUITests.m */; };
 		D98727191C8ECF030002EE49 /* CPJGridLayoutView.m in Sources */ = {isa = PBXBuildFile; fileRef = D98727181C8ECF030002EE49 /* CPJGridLayoutView.m */; };
+		D987274A1C9011CC0002EE49 /* CPJGridView.m in Sources */ = {isa = PBXBuildFile; fileRef = D98727491C9011CC0002EE49 /* CPJGridView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -55,6 +56,8 @@
 		D987270A1C8ECED80002EE49 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D98727171C8ECF030002EE49 /* CPJGridLayoutView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPJGridLayoutView.h; sourceTree = "<group>"; };
 		D98727181C8ECF030002EE49 /* CPJGridLayoutView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPJGridLayoutView.m; sourceTree = "<group>"; };
+		D98727481C9011CC0002EE49 /* CPJGridView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPJGridView.h; sourceTree = "<group>"; };
+		D98727491C9011CC0002EE49 /* CPJGridView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPJGridView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -151,6 +154,8 @@
 			children = (
 				D98727171C8ECF030002EE49 /* CPJGridLayoutView.h */,
 				D98727181C8ECF030002EE49 /* CPJGridLayoutView.m */,
+				D98727481C9011CC0002EE49 /* CPJGridView.h */,
+				D98727491C9011CC0002EE49 /* CPJGridView.m */,
 			);
 			path = CPJGridLayoutView;
 			sourceTree = "<group>";
@@ -285,6 +290,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D987274A1C9011CC0002EE49 /* CPJGridView.m in Sources */,
 				D98726EB1C8ECED70002EE49 /* ViewController.m in Sources */,
 				D98726E81C8ECED70002EE49 /* AppDelegate.m in Sources */,
 				D98727191C8ECF030002EE49 /* CPJGridLayoutView.m in Sources */,

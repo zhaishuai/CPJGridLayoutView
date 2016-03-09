@@ -8,7 +8,7 @@
 
 #import "ViewController.h"
 #import "CPJGridLayoutView.h"
-
+#import "CPJGridLayoutView/CPJGridView.h"
 
 @interface ViewController ()
 
@@ -28,7 +28,7 @@
     gridView.frame = CGRectMake(50, 100, 110, 400);
     gridView.backgroundColor = [UIColor yellowColor];
     for (int i = 0 ; i < 10 ; i++){
-        UIView *view = [[UIView alloc] init];
+        CPJGridView *view = [[CPJGridView alloc] init];
         view.backgroundColor = [UIColor redColor];
         [gridView addSubview:view];
     }
