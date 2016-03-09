@@ -15,10 +15,6 @@ enum CPJGridLayout {
     CPJGRID_TYPE_QUANTITY
 };
 
-// 在此存放所有的子视图
-//
-@property (nonatomic)NSMutableArray *viewArray;
-
 @property (nonatomic, assign)CGFloat            marginX;
 @property (nonatomic, assign)CGFloat            marginY;
 @property (nonatomic, assign)CGSize             subViewsize;
@@ -52,18 +48,14 @@ enum CPJGridLayout {
 }
 
 - (void)layoutView{
-//    if(self.type == CPJGRID_TYPE_SIZE){
-//        NSInteger count = (self.quantity < self.viewArray.count ? self.quantity : self.viewArray.count);
-        NSInteger count = self.viewArray.count;
-        for(int i = 0 ; i < count ; i++){
-            UIView *view = self.viewArray[i];
-            CGPoint point = [self getSizeTypePointWithIndex:i];
-            view.frame = CGRectMake(point.x, point.y, self.subViewsize.width, self.subViewsize.height);
-        }
-        
-//    }else if(self.type == CPJGRID_TYPE_QUANTITY){
-//        
-//    }
+
+    NSInteger count = self.subviews.count;
+    for(int i = 0 ; i < count ; i++){
+        UIView *view = self.subviews[i];
+        CGPoint point = [self getPointWithIndex:i];
+        view.frame = CGRectMake(point.x, point.y, self.subViewsize.width, self.subViewsize.height);
+    }
+
 }
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
@@ -83,45 +75,13 @@ enum CPJGridLayout {
     }
 }
 
-- (CGPoint)getSizeTypePointWithIndex:(NSInteger)index{
+- (CGPoint)getPointWithIndex:(NSInteger)index{
     
     NSInteger row = 0, col = 0; // 行列
     col = index % self.quantity;
     row = index / self.quantity;
     
     return CGPointMake(col * (self.subViewsize.width + self.marginX), row * (self.marginY + self.subViewsize.height));
-}
-
-CPJPROPERTY_INITIALIZER(NSMutableArray, viewArray)
-
-- (void)addView:(UIView *)view{
-    [self addSubview:view];
-    [self.viewArray addObject:view];
-}
-
-- (void)addView:(UIView *)view withIndex:(NSInteger)index{
-    [self addSubview:view];
-    [self.viewArray insertObject:view atIndex:index];
-}
-
-- (void)addView:(UIView *)view afterView:(UIView *)obj{
-    [self addSubview:view];
-    [self.viewArray insertObject:view atIndex:[self.viewArray indexOfObject:obj]];
-}
-
-- (void)removeAllView{
-    [self.viewArray makeObjectsPerformSelector:@selector(removeFromSuperview)];
-    [self.viewArray removeAllObjects];
-}
-
-- (void)removeViewWithIndex:(NSInteger)index{
-    [[self.viewArray objectAtIndex:index] removeFromSuperview];
-    [self.viewArray removeObjectAtIndex:index];
-}
-
-- (void)removeView:(UIView *)view{
-    [view removeFromSuperview];
-    [self.viewArray removeObject:view];
 }
 
 @end

@@ -15,18 +15,14 @@
 
 - (instancetype)initWithMarginX:(CGFloat)mx withMarginY:(CGFloat)my withQuantityOfEachRow:(NSInteger) quantity;
 
+/**
+ * @brief 调用该方法实现布局
+ */
 - (void)layoutView;
 
-- (void)addView:(UIView *)view;
-
-- (void)addView:(UIView *)view withIndex:(NSInteger)index;
-
-- (void)addView:(UIView *)view afterView:(UIView *)obj;
-
-- (void)removeAllView;
-
-- (void)removeViewWithIndex:(NSInteger)index;
-
-- (void)removeView:(UIView *)view;
+/**
+ * @brief 根据添加视图的序号计算出该视图左上角的坐标
+ */
+- (CGPoint)getPointWithIndex:(NSInteger)index;
 
 @end
