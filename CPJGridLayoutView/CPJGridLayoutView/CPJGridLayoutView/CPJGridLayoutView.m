@@ -78,6 +78,7 @@ enum CPJGridLayout {
 - (CGPoint)getPointWithIndex:(NSInteger)index{
     
     NSInteger row = 0, col = 0; // 行列
+    self.quantity = self.quantity == 0 ? 1 : self.quantity;
     col = index % self.quantity;
     row = index / self.quantity;
     
