@@ -85,6 +85,10 @@ enum CPJGridLayout {
     return CGPointMake(col * (self.subViewsize.width + self.marginX), row * (self.marginY + self.subViewsize.height));
 }
 
+- (NSInteger)getIndexOfView:(UIView *)view{
+    return [[NSMutableArray arrayWithArray:self.subviews] indexOfObject:view];
+}
+
 - (void)dealloc{
     [self removeObserver:self forKeyPath:@"frame"];
 }

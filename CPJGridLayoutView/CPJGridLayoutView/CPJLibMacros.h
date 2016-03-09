@@ -25,27 +25,27 @@
     return _##property_name;\
 }
 
-#define CPJCREATE_VIEW_INITIALZER(method_name)\
-- (instancetype)init{\
-    if(self = [super init]){\
-        [self method_name];\
-    }\
-    return self;\
-}\
-\
-- (instancetype)initWithFrame:(CGRect)frame{\
-    if(self = [super initWithFrame:frame]){\
-        [self method_name];\
-    }\
-    return self;\
-}\
-\
-- (instancetype)initWithCoder:(NSCoder *)aDecoder{\
-    if(self = [super initWithCoder:aDecoder]){\
-        [self method_name];\
-    }\
-    return self;\
-}\
+//#define CPJCREATE_VIEW_INITIALZER(method_name)\
+//- (instancetype)init{\
+//    if(self = [super init]){\
+//        [self method_name];\
+//    }\
+//    return self;\
+//}\
+//\
+//- (instancetype)initWithFrame:(CGRect)frame{\
+//    if(self = [super initWithFrame:frame]){\
+//        [self method_name];\
+//    }\
+//    return self;\
+//}\
+//\
+//- (instancetype)initWithCoder:(NSCoder *)aDecoder{\
+//    if(self = [super initWithCoder:aDecoder]){\
+//        [self method_name];\
+//    }\
+//    return self;\
+//}\
 
 
 #endif /* CPJLibMacros_h */

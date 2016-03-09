@@ -10,7 +10,7 @@
 #import "CPJGridLayoutView.h"
 #import "CPJGridLayoutView/CPJGridView.h"
 
-@interface ViewController ()
+@interface ViewController ()<CPJGridViewDelegate>
 
 @property (nonatomic)CPJGridLayoutView *gridView;
 
@@ -29,8 +29,9 @@
     gridView.backgroundColor = [UIColor yellowColor];
     for (int i = 0 ; i < 10 ; i++){
         CPJGridView *view = [[CPJGridView alloc] init];
-        view.backgroundColor = [UIColor redColor];
+        view.backgroundColor = [UIColor greenColor];
         [gridView addSubview:view];
+        view.delegate = self;
     }
     [gridView layoutView];
     [self.view addSubview:gridView];
@@ -47,6 +48,10 @@
     [self.gridView layoutView];
     [sender setTranslation:CGPointZero inView:self.view];
     
+}
+
+- (void)deleteGridViewAction:(CPJGridView *)view{
+    NSLog(@"index: %ld", [self.gridView getIndexOfView:view]);
 }
 
 - (void)didReceiveMemoryWarning {

@@ -25,4 +25,6 @@
  */
 - (CGPoint)getPointWithIndex:(NSInteger)index;
 
+- (NSInteger)getIndexOfView:(UIView *)view;
+
 @end

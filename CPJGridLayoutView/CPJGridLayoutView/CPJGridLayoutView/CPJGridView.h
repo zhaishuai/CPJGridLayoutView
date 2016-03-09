@@ -8,8 +8,17 @@
 
 #import <UIKit/UIKit.h>
 
+@class CPJGridView;
+@protocol CPJGridViewDelegate <NSObject>
+
+- (void)deleteGridViewAction:(CPJGridView *)view;
+
+@end
+
 @interface CPJGridView : UIView
 
-@property (nonatomic, assign)CGSize deleteBtnSize;
+@property (nonatomic)UIImage                       *deleteButtonImage;
+@property (nonatomic, assign)CGSize                deleteBtnSize;
+@property (nonatomic, weak)id<CPJGridViewDelegate> delegate;
 
 @end
