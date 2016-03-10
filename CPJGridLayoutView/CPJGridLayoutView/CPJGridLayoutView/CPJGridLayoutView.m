@@ -21,7 +21,7 @@ enum CPJGridLayout {
 @property (nonatomic, assign)NSInteger          quantity;
 @property (nonatomic, assign)enum CPJGridLayout type;
 
-@end
+@end 
 
 @implementation CPJGridLayoutView
 
@@ -58,6 +58,31 @@ enum CPJGridLayout {
 
 }
 
+- (void)LayoutViewWithAnimationWithComplete:(void (^)())complete{
+    [self layoutViewWithIndex:0 withComplete:complete];
+}
+
+- (void)layoutViewWithIndex:(NSInteger)count withComplete:(void (^)())complete{
+    __block NSInteger index = count;
+    [UIView animateWithDuration:0.2 animations:^{
+        for(int i = 0 ; i < self.quantity && index < self.subviews.count ; i++){
+            UIView *view = self.subviews[index];
+            CGPoint point = [self getPointWithIndex:index];
+            view.frame = CGRectMake(point.x, point.y, self.subViewsize.width, self.subViewsize.height);
+
+            index ++;
+        }
+
+    } completion:^(BOOL finished) {
+        if(finished){
+            if(index < self.subviews.count)
+                [self layoutViewWithIndex:index withComplete:complete];
+            else
+                complete();
+        }
+    }];
+}
+
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
 {
     if(object == self && [keyPath isEqualToString:@"frame"]){
@@ -78,7 +103,7 @@ enum CPJGridLayout {
 - (CGPoint)getPointWithIndex:(NSInteger)index{
     
     NSInteger row = 0, col = 0; // 行列
-    self.quantity = self.quantity == 0 ? 1 : self.quantity;
+    self.quantity = self.quantity <= 0 ? 1 : self.quantity;
     col = index % self.quantity;
     row = index / self.quantity;
     
@@ -87,6 +112,11 @@ enum CPJGridLayout {
 
 - (NSInteger)getIndexOfView:(UIView *)view{
     return [[NSMutableArray arrayWithArray:self.subviews] indexOfObject:view];
+}
+
+- (void)sizeToFit{
+    CGPoint point = [self getPointWithIndex:self.subviews.count - 1];
+    self.frame = CGRectMake(self.frame.origin.x, self.frame.origin.y, self.quantity * (self.subViewsize.width + self.marginX) - self.marginX, point.y + self.subViewsize.height);
 }
 
 - (void)dealloc{

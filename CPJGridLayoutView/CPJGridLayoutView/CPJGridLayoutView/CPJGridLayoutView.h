@@ -20,11 +20,15 @@
  */
 - (void)layoutView;
 
+- (void)LayoutViewWithAnimationWithComplete:(void (^)())complete;
+
 /**
  * @brief 根据添加视图的序号计算出该视图左上角的坐标
  */
 - (CGPoint)getPointWithIndex:(NSInteger)index;
 
 - (NSInteger)getIndexOfView:(UIView *)view;
+
+
 
 @end

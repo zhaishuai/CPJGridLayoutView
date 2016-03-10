@@ -8,7 +8,7 @@
 
 #import "CPJGridView.h"
 #import "CPJLibMacros.h"
-
+#import "CPJGridLayoutView.h"
 @interface CPJGridView ()
 
 @property (nonatomic)UIImageView *imageView;
@@ -55,7 +55,14 @@ CPJPROPERTY_INITIALIZER(UIImageView, imageView)
 
 - (void)deleteAction{
     if([self.delegate respondsToSelector:@selector(deleteGridViewAction:)]){
-        [self.delegate deleteGridViewAction:self];
+        UIView *superview = self.superview;
+        [self removeFromSuperview];
+        if([superview isKindOfClass:[CPJGridLayoutView class]]){
+            [(CPJGridLayoutView *)superview LayoutViewWithAnimationWithComplete:^{
+                [self.delegate deleteGridViewAction:self];
+            }];
+        }
+        
     }
 }
 
