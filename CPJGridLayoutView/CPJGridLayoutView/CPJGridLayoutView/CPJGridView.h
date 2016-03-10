@@ -20,6 +20,10 @@
 @property (nonatomic)UIImage                       *deleteButtonImage;
 @property (nonatomic, assign)CGSize                deleteBtnSize;
 @property (nonatomic, weak)id<CPJGridViewDelegate> delegate;
-
+@property (nonatomic, assign)BOOL                  editMode;
+@property (nonatomic, assign)BOOL                  hideDeleteButton;
+// 存放用户数据
+//
+@property (nonatomic)id                            userData;
 
 @end

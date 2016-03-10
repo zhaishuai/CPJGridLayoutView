@@ -32,6 +32,8 @@
         view.backgroundColor = [UIColor greenColor];
         [gridView addSubview:view];
         view.delegate = self;
+//        view.hideDeleteButton = YES;
+        view.editMode = YES;
         UILabel *label = [UILabel new];
         label.text = [NSString stringWithFormat:@"%d", i];
         label.textColor = [UIColor blackColor];
@@ -46,15 +48,7 @@
     
 }
 
-//- (void)panGestureAction:(UIPanGestureRecognizer *)sender{
-//    
-//    CGPoint point = [sender translationInView:self.view];
-//    
-//    self.gridView.frame = CGRectMake(self.gridView.frame.origin.x, self.gridView.frame.origin.y, self.gridView.frame.size.width + point.x, self.gridView.frame.size.height + point.y);
-//    [self.gridView layoutView];
-//    [sender setTranslation:CGPointZero inView:self.view];
-//
-//}
+
 
 - (void)deleteGridViewAction:(NSInteger)index{
     NSLog(@"index: %ld", index);

@@ -13,7 +13,7 @@
 
 @property (nonatomic)UIImageView *imageView;
 @property (nonatomic)UIButton    *deleteBtn;
-
+@property (nonatomic)UIPanGestureRecognizer *panGestureRecognizer;
 @end
 
 @implementation CPJGridView
@@ -45,9 +45,23 @@ CPJPROPERTY_INITIALIZER(UIImageView, imageView)
     [self.deleteBtn addTarget:self action:@selector(deleteAction) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:self.imageView];
     [self addSubview:self.deleteBtn];
-    UIPanGestureRecognizer *panGestureRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(panGestureAction:)];
-    [self addGestureRecognizer:panGestureRecognizer];
+    self.panGestureRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(panGestureAction:)];
+    
 
+}
+
+- (void)setHideDeleteButton:(BOOL)hideDeleteButton{
+    _hideDeleteButton = hideDeleteButton;
+    self.deleteBtn.hidden = hideDeleteButton;
+}
+
+- (void)setEditMode:(BOOL)editMode{
+    _editMode = editMode;
+    if(editMode){
+        [self addGestureRecognizer:self.panGestureRecognizer];
+    }else{
+        [self removeGestureRecognizer:self.panGestureRecognizer];
+    }
 }
 
 - (void)setDeleteButtonImage:(UIImage *)deleteButtonImage{
