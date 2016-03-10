@@ -11,6 +11,17 @@
 
 @interface CPJGridLayoutView : UIView
 
+enum CPJGridLayout {
+    CPJGRID_TYPE_SIZE,
+    CPJGRID_TYPE_QUANTITY
+};
+
+@property (nonatomic, assign)CGFloat            marginX;
+@property (nonatomic, assign)CGFloat            marginY;
+@property (nonatomic, assign)CGSize             subViewsize;
+@property (nonatomic, assign)NSInteger          quantity;
+@property (nonatomic, assign)enum CPJGridLayout type;
+
 - (instancetype)initWithMarginX:(CGFloat)mx withMarginY:(CGFloat)my withImageSize:(CGSize)size;
 
 - (instancetype)initWithMarginX:(CGFloat)mx withMarginY:(CGFloat)my withQuantityOfEachRow:(NSInteger) quantity;
@@ -26,8 +37,6 @@
  * @brief 根据添加视图的序号计算出该视图左上角的坐标
  */
 - (CGPoint)getPointWithIndex:(NSInteger)index;
-
-- (NSInteger)getIndexOfView:(UIView *)view;
 
 
 

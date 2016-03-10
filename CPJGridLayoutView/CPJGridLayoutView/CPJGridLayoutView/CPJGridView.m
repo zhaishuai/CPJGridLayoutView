@@ -45,6 +45,8 @@ CPJPROPERTY_INITIALIZER(UIImageView, imageView)
     [self.deleteBtn addTarget:self action:@selector(deleteAction) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:self.imageView];
     [self addSubview:self.deleteBtn];
+    UIPanGestureRecognizer *panGestureRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(panGestureAction:)];
+    [self addGestureRecognizer:panGestureRecognizer];
 
 }
 
@@ -53,13 +55,81 @@ CPJPROPERTY_INITIALIZER(UIImageView, imageView)
     [self.deleteBtn setImage:deleteButtonImage forState:UIControlStateNormal];
 }
 
+- (UIImage *) imageWithView:(UIView *)view
+{
+    UIGraphicsBeginImageContextWithOptions(view.bounds.size, view.opaque, 0.0);
+    [view.layer renderInContext:UIGraphicsGetCurrentContext()];
+    
+    UIImage * img = UIGraphicsGetImageFromCurrentImageContext();
+    
+    UIGraphicsEndImageContext();
+    
+    return img;
+}
+
+- (void)panGestureAction:(UIPanGestureRecognizer *)sender{
+    CGPoint point = [sender translationInView:self.superview.superview];
+    static NSInteger currentIndex = 0, zIndex = 0;
+    static CGPoint center;
+    
+    if(![self.superview isKindOfClass:[CPJGridLayoutView class]])
+        return;
+    CPJGridLayoutView *superView = (CPJGridLayoutView *)self.superview;
+    
+    int x = ceil( (point.x - (self.frame.size.width/2 + superView.marginX)) / (self.frame.size.width + superView.marginX) );
+    int y = ceil( (point.y - (self.frame.size.height/2 + superView.marginY)) / (self.frame.size.height + superView.marginY) );
+    NSLog(@"x distance is:%d   y distance is :%d", x, y);
+
+
+    if(sender.state == UIGestureRecognizerStateBegan){
+        zIndex = self.layer.zPosition;
+        self.layer.zPosition = 1;
+        currentIndex = [[NSMutableArray arrayWithArray:self.superview.subviews] indexOfObject:self];
+        center = self.center;
+        
+        self.frame = CGRectMake(superView.frame.origin.x + self.frame.origin.x
+                                , superView.frame.origin.y + self.frame.origin.y,
+                                self.frame.size.width,
+                                self.frame.size.height);
+        
+
+    }else if(sender.state == UIGestureRecognizerStateChanged){
+        
+        CGFloat x = center.x + point.x, y = center.y + point.y;
+        
+        x = x > superView.frame.size.width  ? superView.frame.size.width : x;
+        y = y > superView.frame.size.height ? superView.frame.size.height : y;
+        
+        self.center = CGPointMake(x, y);
+        
+
+
+    }else if(sender.state == UIGestureRecognizerStateEnded){
+        self.layer.zPosition = zIndex;
+        NSInteger index = y*superView.quantity + x + currentIndex;
+        index = index > superView.subviews.count ? superView.subviews.count - 1 : index;
+        
+        
+        
+        [self removeFromSuperview];
+        [superView insertSubview:self atIndex:index];
+        
+        [UIView animateWithDuration:0.2 animations:^{
+            [superView layoutView];
+        }];
+    }
+    
+
+}
+
 - (void)deleteAction{
     if([self.delegate respondsToSelector:@selector(deleteGridViewAction:)]){
         UIView *superview = self.superview;
+        __block NSInteger index = [[NSMutableArray arrayWithArray:self.superview.subviews] indexOfObject:self];
         [self removeFromSuperview];
         if([superview isKindOfClass:[CPJGridLayoutView class]]){
             [(CPJGridLayoutView *)superview LayoutViewWithAnimationWithComplete:^{
-                [self.delegate deleteGridViewAction:self];
+                [self.delegate deleteGridViewAction:index];
             }];
         }
         

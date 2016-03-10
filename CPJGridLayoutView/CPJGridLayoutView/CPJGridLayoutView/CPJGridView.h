@@ -11,7 +11,7 @@
 @class CPJGridView;
 @protocol CPJGridViewDelegate <NSObject>
 
-- (void)deleteGridViewAction:(CPJGridView *)view;
+- (void)deleteGridViewAction:(NSInteger)index;
 
 @end
 
@@ -20,5 +20,6 @@
 @property (nonatomic)UIImage                       *deleteButtonImage;
 @property (nonatomic, assign)CGSize                deleteBtnSize;
 @property (nonatomic, weak)id<CPJGridViewDelegate> delegate;
+
 
 @end

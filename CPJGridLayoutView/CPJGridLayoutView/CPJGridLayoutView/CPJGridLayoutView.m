@@ -7,19 +7,11 @@
 //
 
 #import "CPJGridLayoutView.h"
+#import "CPJGridView.h"
 
 @interface CPJGridLayoutView ()
 
-enum CPJGridLayout {
-    CPJGRID_TYPE_SIZE,
-    CPJGRID_TYPE_QUANTITY
-};
 
-@property (nonatomic, assign)CGFloat            marginX;
-@property (nonatomic, assign)CGFloat            marginY;
-@property (nonatomic, assign)CGSize             subViewsize;
-@property (nonatomic, assign)NSInteger          quantity;
-@property (nonatomic, assign)enum CPJGridLayout type;
 
 @end 
 
@@ -110,9 +102,7 @@ enum CPJGridLayout {
     return CGPointMake(col * (self.subViewsize.width + self.marginX), row * (self.marginY + self.subViewsize.height));
 }
 
-- (NSInteger)getIndexOfView:(UIView *)view{
-    return [[NSMutableArray arrayWithArray:self.subviews] indexOfObject:view];
-}
+
 
 - (void)sizeToFit{
     CGPoint point = [self getPointWithIndex:self.subviews.count - 1];
